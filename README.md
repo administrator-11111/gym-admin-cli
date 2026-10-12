@@ -11,18 +11,16 @@ El sistema está diseñado para ser utilizado exclusivamente por el Administrado
 
 ## Modelo UML de Clases
 Para resolver este problema, modelamos las siguientes entidades basadas en POO (Programación Orientada a Objetos), aplicando herencia y encapsulamiento.
-### 1. Mostrable
+### 1. Imprimible<\<interface\>>
 - **Métodos**
   - + `resumenDatos()` : 
-### 1. Usuario
+### 2. Usuario <\<abstract\>>
 Será la clase base que abstrae las características comunes de los individuos registrados en el sistema.
 - **Atributos** 
   - **#** `id` (Int)
   - **#** `nombreCompleto` (String)
-- **Métodos**
-  - **+** `obtenerDatos()` (String)
 
-### 2. Administrador
+### 3. Administrador
 Hereda de la clase `Usuario`. Representa al personal del gimnasio que opera el sistema.
 - **Atributos** 
   - **-** `nombreUsuario` (String)
@@ -30,14 +28,14 @@ Hereda de la clase `Usuario`. Representa al personal del gimnasio que opera el s
 - **Métodos**
   - **+** `validarCredenciales()` (Boolean - valida el acceso al sistema)
 
-### 3. Cliente
+### 4. Cliente
 Hereda de la clase `Usuario`. Representa a la persona que asiste a entrenar al gimnasio.
 - **Atributos** 
   - **-** `suscripcionAcual` (String)
 - **Métodos**
   - **+** `esMoroso()` (Boolean - verifica si su plan caducó)
 
-### 4. Suscripción
+### 5. Suscripción
 Entidad que gestiona el plan contratando, separando la lógica fincnciera del perfil del cliente.
 - **Atributos** 
   - **-** `tipoPlan` (String)
@@ -45,18 +43,18 @@ Entidad que gestiona el plan contratando, separando la lógica fincnciera del pe
   - **-** `fechaInicio` (Fecha)
   - **-** `fechaFin` (Fecha)
 - **Métodos**
-  - **+** `renovar(meses: Int)`
+  - **+** `renovar(meses: Int)` (Unit)
 
-### 5. Fecha
+### 6. Fecha
 Clase para estructura el manejo del tiempo de las suscripciones.
 - **Atributos** 
   - **-** `dia` (Int) 
   - **-** `mes` (Int) 
-  - **-** `año` (Int)
+  - **-** `anio` (Int)
 - **Métodos**
-  - **+** `sumarMeses(n: Int)`
+  - **+** `sumarMeses(n: Int)` (Unit)
 
-### 6. Gestor
+### 7. Gestor
 - **Atributos privados:** 
   - **-** `clientes` (List\<Cliente\>) 
   - **-** `administradores` (List\<Administrador\>) 
