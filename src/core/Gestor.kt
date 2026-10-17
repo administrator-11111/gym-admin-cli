@@ -62,13 +62,12 @@ fun iniciarSesion(nombreUsuario: String, clave: String): Boolean {          //Re
     }
     fun mostrarMorosos():Unit{
         for(cliente in clientes){
-            val fechatermino
             if(clientes.esMoroso)
             
         }
     }
     fun calcularGanancias():Double{
-
+        
     }   
 
 }

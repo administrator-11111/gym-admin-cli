@@ -4,5 +4,5 @@ class Fecha(
     private val mes:Int,
     private val anio:Int
 ){
-    fun sumarMeses(n:Int):Unit
+    
 }
