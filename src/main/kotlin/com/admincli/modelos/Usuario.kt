@@ -8,6 +8,6 @@ abstract class Usuario(
 ) : Imprimible {
     // usamos open para extender el método a Cliente y Administrador
     open override fun resumenDatos() : String {
-        return "id: $id, nombre: $nombreCompleto"
+        return "id: $id, nombre: $nombreCompleto "
     }
 }
