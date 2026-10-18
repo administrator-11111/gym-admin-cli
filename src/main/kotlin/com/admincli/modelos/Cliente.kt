@@ -12,10 +12,10 @@ class Cliente(
     fun esMoroso() : Boolean {
         // Consultar con el profe si se puede usar java.time :3
         val fechaActual = java.time.LocalDate.now()
-        return fechaActual.isAfter(suscripcionActual.getFechaFin())
+        return fechaActual.isAfter(suscripcionActual.obtenerFechaFin())
     }
 
     override fun resumenDatos() : String {
-        return "${super.resumenDatos()}(Plan: ${suscripcionActual.obtenerTipoPlan()}"
+        return "${super.resumenDatos()}(Plan: ${suscripcionActual.obtenerTipoPlan()} | Finaliza: ${suscripcionActual.obtenerFechaFin()})"
     }
 }
