@@ -11,7 +11,7 @@ classDiagram
     class Administrador {
         - nombreUsuario: String
         - clave: String
-        + validarCredenciales() Boolean
+        + validarCredenciales(usuario: String, clave: String) Boolean
     }
     class Cliente {
         - suscripcionActual: Suscripcion
