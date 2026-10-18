@@ -1,16 +1,26 @@
 package com.admincli.modelos
 
-class Fecha (
-    private val dia:Int,
-    private val mes:Int,
-    private val anio:Int
+import java.time.LocalDate
+
+class Fecha(
+    private var dia: Int,
+    private var mes: Int,
+    private var anio: Int
 ) {
+    // Convierte tu Fecha a LocalDate de Java para poder compararla con isAfter() CONSULTAR AL PROFE!!!
+    fun aLocalDate(): LocalDate {
+        return LocalDate.of(anio, mes, dia)
+    }
+
     fun sumarMeses(n: Int) {
-        // nose xd
+        val nuevaFecha = aLocalDate().plusMonths(n.toLong())
+        this.dia = nuevaFecha.dayOfMonth
+        this.mes = nuevaFecha.monthValue
+        this.anio = nuevaFecha.year
     }
 
     // Muestra la fecha en formato Dia/Mes/Año
-    override fun toString() : String {
+    override fun toString(): String {
         return "$dia/$mes/$anio"
     }
 }

@@ -12,7 +12,7 @@ class Cliente(
     fun esMoroso() : Boolean {
         // Consultar con el profe si se puede usar java.time :3
         val fechaActual = java.time.LocalDate.now()
-        return fechaActual.isAfter(suscripcionActual.obtenerFechaFin())
+        return fechaActual.isAfter(suscripcionActual.obtenerFechaFin().aLocalDate())
     }
 
     override fun resumenDatos() : String {

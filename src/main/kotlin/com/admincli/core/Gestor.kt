@@ -23,11 +23,11 @@ class Gestor {
     }
 
     fun quitarCliente(cliente:Cliente) : Unit{
-        cliente.remove(cliente)
+        clientes.remove(cliente)
     }
 
     fun mostrarMorosos() : Unit {
-        val hayMorosos = false
+        var hayMorosos = false
         for (cliente in clientes){
             if (cliente.esMoroso()) {
                 hayMorosos = true
@@ -39,6 +39,8 @@ class Gestor {
         }
     }
 
-    fun calcularGanancias():Double
+    fun calcularGanancias():Double{
+        return 0.0
+    }
 
 }

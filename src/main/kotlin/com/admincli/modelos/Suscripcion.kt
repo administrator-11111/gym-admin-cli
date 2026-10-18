@@ -7,7 +7,9 @@ class Suscripcion(
     private val fechaFin:Fecha
 ) {
     
-    fun renovar(meses:Int) : Unit
+    fun renovar(meses:Int) : Unit{
+        
+    }
 
     fun obtenerTipoPlan() : String {
         return this.tipoPlan

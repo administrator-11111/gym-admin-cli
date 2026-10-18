@@ -1,5 +1,5 @@
 package com.admincli.interfaces
 
-interface class Imprimible {
-    fun mostrarResumen():String
+interface  Imprimible {
+    fun resumenDatos():String
 }
