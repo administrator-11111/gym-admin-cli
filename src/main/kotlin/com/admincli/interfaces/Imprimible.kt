@@ -1,4 +1,5 @@
 package com.admincli.interfaces
+import java.io.File
 /*
 ver lista de usuarios
     seleccionar usuarios
@@ -49,4 +50,13 @@ fun menu(){
             else -> println("Opcion invalida, elige una opcion valida")
         }
     }while(opcion != 6)
+}
+
+fun main(){
+    //Estructura que tiene que leer
+    //Nombre,Apellido,Suscripcion,FechaSuscripcion
+    val archivo = File("../../../../../../data/usuarios.csv") //Vuelve al directorio raiz /data
+    readline()
+
+
 }
