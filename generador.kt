@@ -13,11 +13,19 @@ class GenerarNombre : GeneradorBase(){
         "Maria", "Carmen", "Estefania", "Luisa", "Alonso", "Ivan", "Haley", "Jose", "Josefa",
         "Lucho", "Mario", "Samuel","Amanda", "Consuelo", "Alejandra","Sonia", "Martina", "Emilia",
         "Gerardo", "Diego", "Lamine","Benjamin", "Diddy", "Philip", "Hugo","Bruno", 
-        "Jeffrey", "Nayetli", "Anais", "Ignacia", "René", "Miguel", "Mauricio")
+        "Jeffrey", "Nayetli", "Anais", "Ignacia", "René", "Miguel", "Mauricio", "Sophia", "Mayte",
+        "Antonio", "Marcos", "Paola", "Fernando", "Claudio", "Eduardo", "Neftalí", "Maximiliano",
+        "Maximo", "Catalina","Javier", "Carlos", "Tomas", "Cesar", "Brayan", "Katerine", "Enrique",
+        "Victor", "Cristiano", "Nicanor", "Aurora", "Abigail", "Sebastian", "Sergio", "Arturo", "Walter",
+        "Vicente", "Gustavo", "Gabriel", "Mercedes", "Pamela", "Renata", "Silvia", "Mariana", "Antonia",
+        "Marcela", "Isidora", "Julieta", "Trinidad", "Victoria", "Valentina")
     private val apellido = listOf("Díaz", "Gonzales", "Mendez", "Torres", "Molina", "Sierra",
         "Grandon", "Leon", "Maldonado", "Retamal", "Quijano", "Canales", "Rios", "Lagos","Gutierrez", 
         "Solis", "Pérez", "Montecino", "López", "Yamal", "Opazo", "Kast", "Vasquez","Netanyahu","Trujillo",
-        "Bachelet", "Araya", "Epstein", "Faúndez", "Valenzuela", "Puente", "Devia", "Paredes")
+        "Bachelet", "Araya", "Faúndez", "Valenzuela", "Puente", "Devia", "Paredes", "Achú", "Jiménez",
+        "Rojas", "Castro", "Barrios", "Fuentes", "Avila", "Moran", "Ronaldo", "Parra", "Leiva", "Piñera",
+        "Quiroz", "Vidal", "Kirk", "Quijote", "Parada", "Manriquez", "Imas", "Morales", "Flores", "Alvarado",
+        "Espinoza", "Durán", "Aguirre", "Ortega", "Dahmer", "Ramirez", "Cárdenas")
     override fun generar(): String{
         return nombre.random() + " " + apellido.random()
     }
@@ -54,7 +62,7 @@ class FechasSuscripcion : GeneradorBase(){
 }
 
 fun main(){
-    val cantidad = 100
+    val cantidad = 200
     val nombre = GenerarNombre()
     val suscripcion = GenerarSuscripcion()
     val fecha = FechasSuscripcion()
