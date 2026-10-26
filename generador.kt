@@ -61,8 +61,8 @@ class FechasSuscripcion : GeneradorBase(){
     }
 }
 
-fun main(){
-    val cantidad = 200
+fun main(){ //Reemplazar main por generar
+    val cantidad = 200 //Esto despues se cambia para los argumentos de generar como cantidad : Int
     val nombre = GenerarNombre()
     val suscripcion = GenerarSuscripcion()
     val fecha = FechasSuscripcion()
