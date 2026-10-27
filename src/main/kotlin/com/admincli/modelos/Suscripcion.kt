@@ -1,6 +1,6 @@
 package com.admincli.modelos
-import java.time.LocalDate
 
+import com.admincli.modelos.Fecha
 /**
  * Representa el plan contratado por un cliente del gimnasio.
  *
@@ -56,17 +56,13 @@ class Suscripcion(
     constructor(tipoPlan: String, costo: Double) : this(
         tipoPlan,
         costo,
-        Fecha(
-            java.time.LocalDate.now().dayOfMonth,
-            java.time.LocalDate.now().monthValue,
-            java.time.LocalDate.now().year
-        ),
+        Fecha(),
         calcularFechaFin(tipoPlan)
     )
 
     companion object {
         private fun calcularFechaFin(tipoPlan: String): Fecha {
-            val hoy = java.time.LocalDate.now()
+            val hoy = Fecha()
 
             val meses = when (tipoPlan) {
                 "Mensual" -> 1
