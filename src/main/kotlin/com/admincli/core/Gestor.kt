@@ -2,8 +2,8 @@ package com.admincli.core
 
 import com.admincli.modelos.Cliente
 import com.admincli.modelos.Administrador
-
-class Gestor {
+// Se usa el patro de diseño Singleton en Gestor
+object Gestor {
     private val clientes: MutableList<Cliente> = mutableListOf()
     private val administradores: MutableList<Administrador> = mutableListOf()
 
@@ -40,7 +40,12 @@ class Gestor {
     }
 
     fun calcularGanancias():Double{
-        return 0.0
+         var ganancia:Double = 0.0
+        for (cliente in clientes){
+            ganancia += cliente.suscripcionActual.obtenerCosto
+            
+        }
+        return ganancia 
     }
 
 }
