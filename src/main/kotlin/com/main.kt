@@ -16,7 +16,7 @@ fun main() {
     println("Sistema de Administración de Gimnasio")
     println("Cargando datos iniciales...")
 
-    val listaAdmins: listOf(
+    val listaAdmins: List<Administrador> = listOf(
         Administrador(0, "Iván Maldonado", "return", "1234"),
         Administrador(0, "Lucas Sierra", "lucas", "1234"),
         Administrador(0, "Alonso Lopez", "topsin", "1234"),
