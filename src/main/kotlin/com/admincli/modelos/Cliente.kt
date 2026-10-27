@@ -14,6 +14,7 @@ class Cliente(
 
     // Atributo privado
     private val suscripcionActual: Suscripcion
+    private var activo: Boolean = true
 ) : Usuario(id, nombreCompleto) {
 
     /**
@@ -27,6 +28,9 @@ class Cliente(
         Suscripcion("Mensual", 0.0)
     )
 
+    fun estaActivo(): Boolean = activo
+    fun desactivar() { activo = false}
+    
     /**
      * Verifica si la suscripción del cliente ha caducado.
      * @return true si la fecha actual es posterior a la fecha de fin de la suscripción.
