@@ -47,5 +47,7 @@ object Gestor {
         }
         return ganancia 
     }
-
+    fun cargarDatos(ruta:String): Boolean{
+        
+    }
 }
