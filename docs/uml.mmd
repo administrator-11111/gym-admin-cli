@@ -7,39 +7,60 @@ classDiagram
         <<abstract>>
         # id: Int
         # nombreCompleto: String
+        +resumenDatos() String
     }
     class Administrador {
         - nombreUsuario: String
         - clave: String
         + validarCredenciales(usuario: String, clave: String) Boolean
+        + resumenDatos() String
     }
     class Cliente {
         - suscripcionActual: Suscripcion
         + esMoroso() Boolean
+        + obtenerCostoSuscripcion() Double
+        + resumenDatos() String
     }
     class Suscripcion {
         - tipoPlan: String
-        - costo: Doble
+        - costo: Double
         - fechaInicio: Fecha
         - fechaFin: Fecha
         + renovar(meses: Int) Unit
+        + obtenerTipoPlan() String
+        + obtenerCosto() Double
+        + obtenerFechaInicio() Fecha
+        + obtenerFechaFin() Fecha
     }
     class Fecha {
         - dia: Int
         - mes: Int
         - anio: Int
         + sumarMeses(n: Int) Unit
+        + aLocalDate() LocalDate
+        + toString() String
     }
     class Gestor {
+        <<singleton>>
         - clientes: List~Cliente~
         - administradores: List~Administrador~
+        + cargarDatos(rutaArchivo: String) Unit
         + iniciarSesion(usuario: String, clave: String) Boolean
         + inscribirCliente(cliente: Cliente) Unit
-        + quitarcliente(cliente: Cliente) Unit
+        + quitarCliente(id: Int) Boolean
+        + listarClientes() Unit
         + mostrarMorosos() Unit
         + calcularGanancias() Double
+        + registrarAdministrador(admin: Administrador) Unit
     }
-    %% Relaciones
+    class Menu {
+        + ejecutar() Unit
+        - mostrarMenu() Unit
+        - limpiarConsola() Unit
+        - inscribirClienteDesdeConsola() Unit
+        - quitarClienteDesdeConsola() Unit
+    }
+%% Relaciones
     Imprimible <|.. Usuario : implementa
     Usuario <|-- Administrador : hereda
     Usuario <|-- Cliente : hereda
@@ -47,3 +68,4 @@ classDiagram
     Suscripcion *-- Fecha : compone
     Gestor o-- Cliente : agrega
     Gestor o-- Administrador : agrega
+    Menu ..> Gestor : usa
