@@ -103,7 +103,7 @@ object Gestor {
      * @param id El identificador (ID) numérico del cliente a eliminar.
      * @return `true` si el cliente fue encontrado y eliminado con éxito, `false` si el ID no existe.
      */
-    fun quitarCliente(cliente:Cliente) : Boolean{
+    fun quitarCliente(id : Int) : Boolean{
         val cliente = clientes.find { it.id == id }
         return if (cliente != null) {
             clientes.remove(cliente)
