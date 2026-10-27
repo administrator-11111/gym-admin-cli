@@ -4,12 +4,37 @@ import com.admincli.core.Gestor
 import com.admincli.modelos.Cliente
 import com.admincli.modelos.Suscripcion
 import com.admincli.modelos.Fecha
+import com.admincli.modelos.Administrador
+import com.admincli.interfaces.Menu
 
-
+/**
+ * Punto de entrada principal del sistema de administración de gimnasio.
+ * Carga los datos iniciales desde el archivo CSV, registra al administrador
+ * por defecto y ejecuta el sistema.
+ */
 fun main() {
-    println("hola :)")
+    println("Sistema de Administración de Gimnasio")
+    println("Cargando datos iniciales...")
 
-    val gestor = Gestor()
+    val listaAdmins: listOf(
+        Administrador(0, "Iván Maldonado", "return", "1234"),
+        Administrador(0, "Lucas Sierra", "lucas", "1234"),
+        Administrador(0, "Alonso Lopez", "topsin", "1234"),
+        Administrador(0, "Yeral Mendez", "yerbal", "1234")
+    )
+
+    listaAdmins.forEach { admin ->
+        Gestor.registrarAdministrador(admin)
+    }
+
+    Gestor.cargarDatos("data/usuarios.csv")
+
+    val menu: Menu = Menu()
+    menu.ejecutar()
+}
+
+
+/* Código anterior(No borrar aun :p )
 
     gestor.inscribirCliente(Cliente(1, "Juan Pérez", Suscripcion("Mensual", 20000.0,  Fecha(1, 10, 2026),  Fecha(30, 10, 2026))))
     gestor.inscribirCliente(Cliente(2, "María González", Suscripcion("Mensual", 20000.0,  Fecha(1, 9, 2026),  Fecha(30, 9, 2026)))) // Moroso
@@ -37,4 +62,4 @@ fun main() {
     gestor.inscribirCliente(Cliente(20, "Fernanda Pizarro", Suscripcion("Anual", 200000.0,  Fecha(1, 10, 2026),  Fecha(30, 9, 2027))))
 
     gestor.mostrarMorosos()
-}
+ */
