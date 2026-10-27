@@ -30,45 +30,66 @@ object Gestor {
      * @param rutaArchivo Ruta al archivo CSV.
      */
     fun cargarDatos(rutaArchivo: String) {
-        val archivo = File("../../../../../../data/usuarios.csv")
+        val archivo = File(rutaArchivo)
         if (!archivo.exists()) {
             println("Error: archivo no encontrado en $rutaArchivo")
             return
         }
 
-        val lineas = archivo.readLines()
-        var idContador = 1
+        val lineas: List<String> = archivo.readLines()
+
         for (i in 1 until lineas.size) { // 1 ... Nos saltamos el encabezado
             try {
-                val campos = lineas[i].split(",")
-                if (campos.size < 4) continue
+                // Formato que lee ahora: Id,"Nombre Completo",Suscripcion,Costo,FechaInicio,FechaFin
+                val linea: String = lineas[i]
+                val campos: MutableList<String> = mutableListOf<String>()
+                var actual: String = ""
+                var dentroComillas: Boolean = false
 
-                val nombreCompleto = "${campos[0].trim()} ${campos[1].trim()}"
-                val suscripcionParts = campos[2].trim().split(" ")
-                val tipoPlan = suscripcionParts[0]
-                val costo = suscripcionParts[1].toDouble()
-                val fechaParts = campos[3].trim().split("/")
-                val dia = fechaParts[0].toInt()
-                val mes = fechaParts[1].toInt()
-                val anio = fechaParts[2].toInt()
-
-                val fechaInicio = Fecha(dia, mes, anio)
-                val fechaFin = Fecha(dia, mes, anio)
-                // Calcular fecha fin según tipo de plan
-                when (tipoPlan) {
-                    "Mensual" -> fechaFin.sumarMeses(1)
-                    "Trimestral" -> fechaFin.sumarMeses(3)
-                    "Anual" -> fechaFin.sumarMeses(12)
+                for (c: Char in linea) {
+                    when {
+                        c == '"' -> dentroComillas = !dentroComillas
+                        c == ',' && !dentroComillas -> {
+                            campos.add(actual.trim())
+                            actual = ""
+                        }
+                        else -> actual += c
+                    }
                 }
+                campos.add(actual.trim())
+
+                if (campos.size < 6) continue
+
+                val id: Int = campos[0].toInt()
+                val nombreCompleto: String = campos[1]
+                val tipoPlan: String = campos[2]
+                val costo: Double = campos[3].toDouble()
+
+                val fechaInicioParts: List<String> = campos[4].split("/")
+                val fechaInicio: Fecha = Fecha(
+                    fechaInicioParts[0].toInt(),
+                    fechaInicioParts[1].toInt(),
+                    fechaInicioParts[2].toInt()
+                )
+
+                val fechaFinParts: List<String> = campos[5].split("/")
+                val fechaFin: Fecha = Fecha(
+                    fechaFinParts[0].toInt(),
+                    fechaFinParts[1].toInt(),
+                    fechaFinParts[2].toInt()
+                )
 
                 val suscripcion = Suscripcion(tipoPlan, costo, fechaInicio, fechaFin)
                 val cliente = Cliente(idContador, nombreCompleto, suscripcion)
+                val suscripcion: Suscripcion = Suscripcion(tipoPlan, costo, fechaInicio, fechaFin)
+                val cliente: Cliente = Cliente(id, nombreCompleto, suscripcion)
+
                 inscribirCliente(cliente)
-                idContador++
             } catch (e: Exception) {
                 println("Advertencia: Error al procesar línea ${i + 1}: ${e.message}")
             }
         }
+        println("Se cargaron ${clientes.size} clientes desde $rutaArchivo")
     }
 
     /**
