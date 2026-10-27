@@ -8,9 +8,9 @@
         private var anio: Int
     ) {
         constructor():this(         //Constructor secundario que da la fecha actual
-            LocalDate.now().dayofmonth,
+            LocalDate.now().dayOfMonth,
             LocalDate.now().monthValue,
-            LocalDate.now()year
+            LocalDate.now().year
         )
         // Convierte tu Fecha a LocalDate de Java para poder compararla con isAfter() CONSULTAR AL PROFE!!!
         fun aLocalDate(): LocalDate {

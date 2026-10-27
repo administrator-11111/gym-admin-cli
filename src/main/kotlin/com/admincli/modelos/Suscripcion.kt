@@ -68,10 +68,10 @@ class Suscripcion(
                 "Mensual" -> 1
                 "Trimestral" -> 3
                 "Anual" -> 12
-                else -> throw IllegalArgumentException("Plan no válido")
+                else -> throw IllegalArgumentException("Plan no válido $tipoPlan")
             }
 
-            val termino = hoy.plusMonths(meses.toLong())
+            val termino = hoy.aLocalDate().plusMonths(meses.toLong())
 
             return Fecha(
                 termino.dayOfMonth,

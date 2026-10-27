@@ -1,4 +1,5 @@
 package com.admincli.interfaces
+import com.admincli.interfaces.Imprimible
 import com.admincli.core.Gestor
 
 /*
@@ -12,9 +13,7 @@ ver ganancias
 salir del sistema
 */
 
-class Menu(
-    val gestor= Gestor()
-):Imprimible(){
+class Menu(val gestor = Gestor()) : Imprimible{
     fun limpiarConsola() {
     print("\u001b[H\u001b[2J")
     System.out.flush()
