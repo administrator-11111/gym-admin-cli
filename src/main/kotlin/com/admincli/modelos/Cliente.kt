@@ -30,13 +30,12 @@ class Cliente(
 
     fun estaActivo(): Boolean = activo
     fun desactivar() { activo = false}
-    
+
     /**
      * Verifica si la suscripción del cliente ha caducado.
      * @return true si la fecha actual es posterior a la fecha de fin de la suscripción.
      */
     fun esMoroso() : Boolean {
-        // Consultar con el profe si se puede usar java.time :3
         val fechaActual = java.time.LocalDate.now()
         return fechaActual.isAfter(suscripcionActual.obtenerFechaFin().aLocalDate())
     }
