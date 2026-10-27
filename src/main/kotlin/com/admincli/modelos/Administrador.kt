@@ -28,7 +28,6 @@ class Administrador(
      */
     constructor(id: Int, nombreCompleto: String) : this(id, nombreCompleto, "admin", "admin")
 
-
     /**
      * Comprueba si las credenciales recibidas coinciden con las almacenadas.
      *
@@ -40,5 +39,13 @@ class Administrador(
      */
     fun validarCredenciales(usuario: String, clave: String): Boolean {
         return (this.nombreUsuario == usuario && this.clave == clave)
+    }
+
+    /**
+     * Devuelve un resumen con los datos del administrador, incluyendo su nombre de usuario.
+     * @return String con ID, nombre y rol de administrador.
+     */
+    override fun resumenDatos(): String {
+        return "${super.resumenDatos()} [Admin: $nombreUsuario]"
     }
 }
