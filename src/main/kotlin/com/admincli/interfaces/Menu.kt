@@ -40,7 +40,7 @@ class Menu(
         opcion = readln().toIntOrNull() ?: 0
         when(opcion){
             1 -> {println("Listar clientes") 
-            listarClientes()}
+            gestor.listarClientes()}
             2 -> println("2")
             3 -> println("3")
             4 -> println("4")
@@ -53,11 +53,11 @@ class Menu(
 }
 
 
-fun main(){
+/*fun main(){
     //Estructura que tiene que leer
     //Nombre,Apellido,Suscripcion,FechaSuscripcion
     val archivo = File("../../../../../../data/usuarios.csv") //Vuelve al directorio raiz /data
     readline()
 
 
-}
+}*/

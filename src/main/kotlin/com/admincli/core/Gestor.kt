@@ -30,7 +30,7 @@ object Gestor {
      * @param rutaArchivo Ruta al archivo CSV.
      */
     fun cargarDatos(rutaArchivo: String) {
-        val archivo = File(rutaArchivo)
+        val archivo = File("../../../../../../data/usuarios.csv")
         if (!archivo.exists()) {
             println("Error: archivo no encontrado en $rutaArchivo")
             return
