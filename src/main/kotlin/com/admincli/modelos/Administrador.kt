@@ -22,6 +22,14 @@ class Administrador(
 ) : Usuario(id, nombreCompleto) { // Hereda usuario
 
     /**
+     * Constructor secundario que crea un administrador con credenciales por defecto.
+     * @param id Identificador único del administrador.
+     * @param nombreCompleto Nombre completo del administrador.
+     */
+    constructor(id: Int, nombreCompleto: String) : this(id, nombreCompleto, "admin", "admin")
+
+
+    /**
      * Comprueba si las credenciales recibidas coinciden con las almacenadas.
      *
      * Ambas comparaciones distinguen entre mayúsculas y minúsculas.
