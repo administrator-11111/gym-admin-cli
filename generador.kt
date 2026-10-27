@@ -71,17 +71,42 @@ fun main(){ //Reemplazar main por generar
     archivo.parentFile.mkdirs()
     println(archivo.exists())
     archivo.printWriter().use { escritor ->
-        escritor.println("Nombre,Apellido,Suscripcion,FechaSuscripcion")
+        escritor.println("Id,Nombre,Apellido,Suscripcion,Costo,FechaInicio,FechaFin")
 
-        repeat(cantidad){
-            val datos = nombre.generar().split(" ")
-            val tipo = suscripcion.generar()
-            val fechaSuscripcion = fecha.generar()
+        repeat(cantidad){ i ->
+            val nombreCompleto = nombre.generar()
 
-            escritor.println("${datos[0]},${datos[1]},$tipo,$fechaSuscripcion")
+            val datosSuscripcion = suscripcion.generar().split(" ")
+            val tipo = datosSuscripcion[0]
+            val costo = datosSuscripcion[1].toDouble()
+
+            val meses = when(tipo){
+                "Mensual" -> 1
+                "Trimestral" -> 3
+                "Anual" -> 12
+                else -> 0
+            }
+
+            val datosFecha = fecha.generar().split("/")
+            val inicio = Fecha(
+                datosFecha[0].toInt(),
+                datosFecha[1].toInt(),
+                datosFecha[2].toInt()
+            )
+
+            val fechaFinal = inicio.aLocalDate()
+                .plusMonths(meses.toLong())
+                .minusDays(1)
+
+            val fin = Fecha(
+                fechaFinal.dayOfMonth,
+                fechaFinal.monthValue,
+                fechaFinal.year
+            )
+
+            escritor.println("${i+1},\"$nombreCompleto\",$tipo,$costo,$inicio,$fin")
         }
     }
-
     println("Archivo generado correctamente.")
     println(archivo.absolutePath)
 }
