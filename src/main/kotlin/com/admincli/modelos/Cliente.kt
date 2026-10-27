@@ -13,7 +13,7 @@ class Cliente(
     nombreCompleto: String,
 
     // Atributo privado
-    private val suscripcionActual: Suscripcion
+    private val suscripcionActual: Suscripcion,
     private var activo: Boolean = true
 ) : Usuario(id, nombreCompleto) {
 
