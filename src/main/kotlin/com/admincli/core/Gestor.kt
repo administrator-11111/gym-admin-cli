@@ -93,6 +93,14 @@ object Gestor {
     }
 
     /**
+     * Registra un administrador en el sistema.
+     * @param admin Instancia de [Administrador] a registrar.
+     */
+    fun registrarAdministrador(admin: Administrador) {
+        administradores.add(admin)
+    }
+
+    /**
      * Valida las credenciales ingresadas contra la lista de administradores autorizados.
      *
      * @param usuario El nombre de usuario del administrador.
