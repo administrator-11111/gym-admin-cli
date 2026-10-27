@@ -159,6 +159,21 @@ object Gestor {
     }
 
     /**
+     * Lista todos los usuarios del sistema (clientes y administradores)
+     * usando polimorfismo a través de la interfaz Imprimible.
+     */
+    fun listarTodosLosUsuarios() {
+        val usuarios: List<Imprimible> = clientes + administradores
+        if (usuarios.isEmpty()) {
+            println("No hay usuarios registrados.")
+            return
+        }
+        for (usuario: Imprimible in usuarios) {
+            println(usuario.resumenDatos())
+        }
+    }
+
+    /**
      * Filtra y muestra en la consola el listado de clientes cuya suscripción ha expirado.
      *
      * Determina el estado evaluando la función `esMoroso()` de cada [Cliente].
