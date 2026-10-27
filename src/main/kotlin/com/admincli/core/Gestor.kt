@@ -25,6 +25,53 @@ object Gestor {
     private val administradores: MutableList<Administrador> = mutableListOf()
 
     /**
+     * Carga clientes desde un archivo CSV.
+     * Formato esperado: Nombre,Apellido,Suscripcion TipoCosto,Dia/Mes/Anio
+     * @param rutaArchivo Ruta al archivo CSV.
+     */
+    fun cargarDatos(rutaArchivo: String) {
+        val archivo = File(rutaArchivo)
+        if (!archivo.exists()) {
+            println("Error: archivo no encontrado en $rutaArchivo")
+            return
+        }
+
+        val lineas = archivo.readLines()
+        var idContador = 1
+        for (i in 1 until lineas.size) { // 1 ... Nos saltamos el encabezado
+            try {
+                val campos = lineas[i].split(",")
+                if (campos.size < 4) continue
+
+                val nombreCompleto = "${campos[0].trim()} ${campos[1].trim()}"
+                val suscripcionParts = campos[2].trim().split(" ")
+                val tipoPlan = suscripcionParts[0]
+                val costo = suscripcionParts[1].toDouble()
+                val fechaParts = campos[3].trim().split("/")
+                val dia = fechaParts[0].toInt()
+                val mes = fechaParts[1].toInt()
+                val anio = fechaParts[2].toInt()
+
+                val fechaInicio = Fecha(dia, mes, anio)
+                val fechaFin = Fecha(dia, mes, anio)
+                // Calcular fecha fin según tipo de plan
+                when (tipoPlan) {
+                    "Mensual" -> fechaFin.sumarMeses(1)
+                    "Trimestral" -> fechaFin.sumarMeses(3)
+                    "Anual" -> fechaFin.sumarMeses(12)
+                }
+
+                val suscripcion = Suscripcion(tipoPlan, costo, fechaInicio, fechaFin)
+                val cliente = Cliente(idContador, nombreCompleto, suscripcion)
+                inscribirCliente(cliente)
+                idContador++
+            } catch (e: Exception) {
+                println("Advertencia: Error al procesar línea ${i + 1}: ${e.message}")
+            }
+        }
+    }
+
+    /**
      * Valida las credenciales ingresadas contra la lista de administradores autorizados.
      *
      * @param usuario El nombre de usuario del administrador.
