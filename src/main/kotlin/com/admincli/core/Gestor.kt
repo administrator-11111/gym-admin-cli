@@ -103,9 +103,8 @@ object Gestor {
      * @param id El identificador (ID) numérico del cliente a eliminar.
      * @return `true` si el cliente fue encontrado y eliminado con éxito, `false` si el ID no existe.
      */
-    fun quitarCliente(cliente:Cliente) : Unit{
+    fun quitarCliente(cliente:Cliente) : Boolean{
         val cliente = clientes.find { it.id == id }
-        clientes.remove(cliente)
         return if (cliente != null) {
             clientes.remove(cliente)
             println("Cliente eliminado: ${cliente.resumenDatos()}")
@@ -156,7 +155,7 @@ object Gestor {
     fun calcularGanancias():Double{
         var ganancia:Double = 0.0
         for (cliente in clientes){
-            ganancia += cliente.suscripcionActual.obtenerCosto
+            ganancia += cliente.obtenerCostoSuscripcion()
         }
         return ganancia 
     }
