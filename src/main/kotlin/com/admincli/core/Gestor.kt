@@ -4,6 +4,7 @@ import com.admincli.modelos.Cliente
 import com.admincli.modelos.Administrador
 import com.admincli.modelos.Suscripcion
 import com.admincli.modelos.Fecha
+import com.admincli.interfaces.Imprimible
 import java.io.File
 
 /**
@@ -79,8 +80,6 @@ object Gestor {
                     fechaFinParts[2].toInt()
                 )
 
-                val suscripcion = Suscripcion(tipoPlan, costo, fechaInicio, fechaFin)
-                val cliente = Cliente(idContador, nombreCompleto, suscripcion)
                 val suscripcion: Suscripcion = Suscripcion(tipoPlan, costo, fechaInicio, fechaFin)
                 val cliente: Cliente = Cliente(id, nombreCompleto, suscripcion)
 
