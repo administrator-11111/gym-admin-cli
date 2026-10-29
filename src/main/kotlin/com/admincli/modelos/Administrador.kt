@@ -19,7 +19,7 @@ class Administrador(
     // Atributos privados
     private val nombreUsuario: String,
     private val clave: String
-) : Usuario(id, nombreCompleto) { // Hereda usuario
+) : Usuario(id, nombreCompleto) {
 
     /**
      * Constructor secundario que crea un administrador con credenciales por defecto.
@@ -27,6 +27,9 @@ class Administrador(
      * @param nombreCompleto Nombre completo del administrador.
      */
     constructor(id: Int, nombreCompleto: String) : this(id, nombreCompleto, "admin", "admin")
+
+    fun obtenerNombreUsuario(): String = nombreUsuario
+    fun obtenerClave(): String = clave
 
     /**
      * Comprueba si las credenciales recibidas coinciden con las almacenadas.
@@ -47,5 +50,9 @@ class Administrador(
      */
     override fun resumenDatos(): String {
         return "${super.resumenDatos()} [Admin: $nombreUsuario]"
+    }
+
+    fun toCsvRow(): String {
+        return "$id,\"$nombreCompleto\",$nombreUsuario,$clave"
     }
 }
