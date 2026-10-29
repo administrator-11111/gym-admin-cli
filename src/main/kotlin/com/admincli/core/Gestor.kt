@@ -48,8 +48,6 @@ object Gestor {
      */
     fun generarSiguienteAdminId(): Int = siguienteAdminId
 
-    // --- CARGA Y PERSISTENCIA DE ADMINISTRADORES ---
-
     /**
      * Carga los registros de administradores desde un archivo CSV hacia la lista en memoria.
      *
@@ -119,8 +117,6 @@ object Gestor {
             println("Error al guardar administradores en $rutaArchivo: ${e.message}")
         }
     }
-
-    // --- CARGA Y PERSISTENCIA DE CLIENTES ---
 
     /**
      * Carga los registros de clientes y sus respectivas suscripciones desde un archivo CSV.
@@ -193,8 +189,6 @@ object Gestor {
         }
     }
 
-    // --- PARSEO CSV AUXILIAR ---
-
     /**
      * Descompone una línea de texto en formato CSV en una lista de campos individuales.
      *
@@ -223,7 +217,6 @@ object Gestor {
         return campos
     }
 
-    // --- GESTIÓN DE CLIENTES ---
 
     /**
      * Registra un nuevo cliente en el sistema y persiste los cambios en el archivo CSV.

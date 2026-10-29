@@ -15,7 +15,10 @@ abstract class Usuario(
     val id: Int,
     val nombreCompleto: String
 ) : Imprimible {
-    // usamos open para extender el método a Cliente y Administrador
+    /**
+     * Constructor secundario que asigna un nombre por defecto.
+     */
+    constructor(id: Int) : this(id, "Sin Nombre")
     open override fun resumenDatos() : String {
         return "id: $id, nombre: $nombreCompleto "
     }
