@@ -1,3 +1,5 @@
+## Diagrama UML de Clases
+```mermaid
 classDiagram
     class Imprimible {
         <<interface>>
@@ -65,7 +67,6 @@ classDiagram
         - editarClientePasoAPaso(cliente: Cliente) Unit
         - inscribirClienteDesdeConsola() Unit
     }
-%% Relaciones
     Imprimible <|.. Usuario : implementa
     Usuario <|-- Administrador : hereda
     Usuario <|-- Cliente : hereda

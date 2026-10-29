@@ -213,7 +213,6 @@ class Menu(private val usuarioActual: String = "Admin"){
 
             val registrado = Gestor.inscribirCliente(cliente)
             if(registrado){
-                //val ultimoId = File("data/usuarios.csv").appendText("\n$id,\"$nombre\",$tipoPlan,$costo,$fechaInicio,$fechaFin")
                 println("Cliente inscrito exitosamente: ${cliente.resumenDatos()}")
             }
         } catch (e: NumberFormatException) {

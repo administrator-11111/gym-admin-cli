@@ -2,7 +2,7 @@ package com.admincli.interfaces
 
 /**
  * Interfaz que define la capacidad de generar un resumen textual de datos.
- * Implementada por todas las clases que representatn entidades del sitema.
+ * Implementada por todas las clases que representan entidades del sitema.
  */
 interface Imprimible {
     /**
