@@ -126,9 +126,9 @@ fun main(){
     archivo.parentFile.mkdirs()
     println(archivo.exists())
     archivo.printWriter().use { escritor ->
-        escritor.println("Id,Nombre,Apellido,Suscripcion,Costo,FechaInicio,FechaFin")
+        escritor.println("Id,Nombre Completo,Suscripcion,Costo,FechaInicio,FechaFin")
 
-        // Genera y separa el nombre completo.
+        // Genera el nombre completo
         repeat(cantidad){ i ->
             val nombreCompleto = nombre.generar()
 
