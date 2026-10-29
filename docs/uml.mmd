@@ -1,72 +1,105 @@
-## Diagrama UML de Clases
-```mermaid
 classDiagram
     class Imprimible {
         <<interface>>
         +resumenDatos() String
     }
+
     class Usuario {
         <<abstract>>
-        # id: Int
-        # nombreCompleto: String
+        +id: Int
+        +nombreCompleto: String
         +resumenDatos() String
     }
+
     class Administrador {
-        - nombreUsuario: String
-        - clave: String
-        + validarCredenciales(usuario: String, clave: String) Boolean
-        + resumenDatos() String
+        -nombreUsuario: String
+        -clave: String
+        +obtenerNombreUsuario() String
+        +obtenerClave() String
+        +validarCredenciales(usuario: String, clave: String) Boolean
+        +resumenDatos() String
+        +toCsvRow() String
     }
+
     class Cliente {
-        - suscripcionActual: Suscripcion
-        + esMoroso() Boolean
-        + obtenerCostoSuscripcion() Double
-        + obtenerSuscripcion() Suscripcion
-        + resumenDatos() String
+        -suscripcionActual: Suscripcion
+        -activo: Boolean
+        +estaActivo() Boolean
+        +activar() Unit
+        +desactivar() Unit
+        +esMoroso() Boolean
+        +obtenerCostoSuscripcion() Double
+        +obtenerTipoPlan() String
+        +obtenerFechaInicio() Fecha
+        +obtenerFechaFin() Fecha
+        +resumenDatos() String
+        +toCsvRow() String
     }
+
     class Suscripcion {
-        - tipoPlan: String
-        - costo: Double
-        - fechaInicio: Fecha
-        - fechaFin: Fecha
-        + obtenerTipoPlan() String
-        + obtenerCosto() Double
-        + obtenerFechaInicio() Fecha
-        + obtenerFechaFin() Fecha
+        -tipoPlan: String
+        -costo: Double
+        -fechaInicio: Fecha
+        -fechaFin: Fecha
+        +obtenerTipoPlan() String
+        +obtenerCosto() Double
+        +obtenerFechaInicio() Fecha
+        +obtenerFechaFin() Fecha
+        +duracionMeses(tipoPlan: String)$ Int
+        -calcularFechaFin(tipoPlan: String)$ Fecha
     }
+
     class Fecha {
-        - dia: Int
-        - mes: Int
-        - anio: Int
-        + sumarMeses(n: Int) Unit
-        + aLocalDate() LocalDate
-        + toString() String
+        -dia: Int
+        -mes: Int
+        -anio: Int
+        +aLocalDate() LocalDate
+        +sumarMeses(n: Int) Unit
+        +toString() String
+        +desdeString(cadena: String)$ Fecha
     }
+
     class Gestor {
         <<singleton>>
-        - clientes: List~Cliente~
-        - administradores: List~Administrador~
-        + cargarDatos(rutaArchivo: String) Unit
-        + iniciarSesion(usuario: String, clave: String) Boolean
-        + inscribirCliente(cliente: Cliente) Boolean
-        + quitarCliente(id: Int) Boolean
-        + listarClientes() Unit
-        + mostrarMorosos() Unit
-        + calcularGanancias() Double
-        + registrarAdministrador(admin: Administrador) Unit
-        + obtenerSiguienteId() Int
-        + buscarCliente(id: Int) Cliente
-        + actualizarCliente(clienteActualizado: Cliente) Boolean
-        + reescribirCsv() Unit
+        -clientes: List~Cliente~
+        -administradores: List~Administrador~
+        -siguienteClienteId: Int
+        -siguienteAdminId: Int
+        -rutaArchivoClientes: String
+        -rutaArchivoAdmins: String
+        +generarSiguienteClienteId() Int
+        +generarSiguienteAdminId() Int
+        +cargarAdministradores(rutaArchivo: String) Unit
+        +guardarAdministradores(rutaArchivo: String) Unit
+        +cargarDatos(rutaArchivo: String) Unit
+        +guardarDatos(rutaArchivo: String) Unit
+        -parsearCamposCsv(linea: String) List~String~
+        +inscribirCliente(cliente: Cliente) Boolean
+        +quitarCliente(id: Int) Boolean
+        +buscarCliente(criterio: String) List~Cliente~
+        +buscarClientePorId(id: Int) Cliente
+        +obtenerMorosos() List~Cliente~
+        +obtenerTodosLosUsuarios() List~Imprimible~
+        +obtenerListaClientes() List~Cliente~
+        +obtenerAdministradores() List~Administrador~
+        +registrarAdministrador(admin: Administrador) Unit
+        +iniciarSesion(usuario: String, clave: String) Administrador
+        +calcularGanancias() Double
+        +obtenerMetricas() Map~String, Any~
     }
+
     class Menu {
-        + ejecutar() Unit
-        - mostrarMenu() Unit
-        - limpiarConsola() Unit
-        - gestionarListaClientes() Unit
-        - editarClientePasoAPaso(cliente: Cliente) Unit
-        - inscribirClienteDesdeConsola() Unit
+        +solicitarAutenticacion() Boolean
+        +ejecutar() Unit
+        -limpiarConsola() Unit
+        -mostrarMenu() Unit
+        -inscribirClienteDesdeConsola() Unit
+        -quitarClienteDesdeConsola() Unit
+        -buscarClienteDesdeConsola() Unit
+        -mostrarMetricasDesdeConsola() Unit
     }
+
+%% Relaciones
     Imprimible <|.. Usuario : implementa
     Usuario <|-- Administrador : hereda
     Usuario <|-- Cliente : hereda
@@ -75,3 +108,7 @@ classDiagram
     Gestor o-- Cliente : agrega
     Gestor o-- Administrador : agrega
     Menu ..> Gestor : usa
+    Menu ..> Cliente : crea / manipula
+    Menu ..> Suscripcion : crea
+    Menu ..> Fecha : crea
+    Menu ..> Administrador : consulta
