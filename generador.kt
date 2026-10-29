@@ -92,7 +92,7 @@ class GenerarSuscripcion : GeneradorBase(){
  */
 class FechasSuscripcion : GeneradorBase(){
     override fun generar(): String{
-        val anio = (2020..2026).random()
+        val anio = (2025..2027).random()
         val mes = (1..12).random()
 
         // Obtiene los días del mes, considerando años bisiestos.
@@ -115,7 +115,7 @@ class FechasSuscripcion : GeneradorBase(){
  * Si ya existe, su contenido se sobrescribe.
  */
 fun main(){
-    val cantidad = 200 
+    val cantidad = 100
 
     val nombre = GenerarNombre()
     val suscripcion = GenerarSuscripcion()
