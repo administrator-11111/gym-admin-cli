@@ -5,6 +5,7 @@ import com.admincli.modelos.Cliente
 import com.admincli.modelos.Suscripcion
 import com.admincli.modelos.Fecha
 import java.io.File
+import java.math.BigDecimal //Para mostrar las ganacias con el numero completo
 
 /**
  * Clase que gestiona la interfaz interactiva (REPL) del sistema.
@@ -45,7 +46,7 @@ class Menu {
                         Gestor.mostrarMorosos()
                     }
                     4 -> {
-                        val ganancias = Gestor.calcularGanancias()
+                        val ganancias = BigDecimal(Gestor.calcularGanancias()).toPlainString()
                         println("=== Ganancias totales: $$ganancias ===")
                     }
                     5 -> println("Saliendo del sistema...")
