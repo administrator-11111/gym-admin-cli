@@ -128,6 +128,7 @@ object Gestor {
             return false
         }
         clientes.add(cliente)
+        reescribirCsv()
         return true
     }
 
@@ -142,13 +143,13 @@ object Gestor {
         return if (cliente != null) {
             clientes.remove(cliente)
             println("Cliente eliminado: ${cliente.resumenDatos()}")
+            reescribirCsv()
             true
         } else {
             println("No se encontró un cliente con ID $id")
             false
         }
     }
-
     /**
      * Muestra en la consola un listado con el resumen de datos de todos los clientes registrados.
      * Si la lista está vacía, notifica que no hay clientes.
@@ -164,17 +165,82 @@ object Gestor {
     }
 
     /**
-     * Lista todos los usuarios del sistema (clientes y administradores)
-     * usando polimorfismo a través de la interfaz Imprimible.
+     * Obtiene el siguiente ID disponible leyendo la última línea del archivo CSV.
+     * También valida contra los clientes en memoria para evitar colisiones.
      */
-    fun listarTodosLosUsuarios() {
-        val usuarios: List<Imprimible> = clientes + administradores
-        if (usuarios.isEmpty()) {
-            println("No hay usuarios registrados.")
-            return
+    fun obtenerSiguienteId(rutaArchivo: String = "data/usuarios.csv"): Int {
+        val archivo = File(rutaArchivo)
+        var ultimoIdCsv = 0
+
+        if (archivo.exists()) {
+            val lineas = archivo.readLines()
+            // Recorremos desde la última línea hacia atrás buscando una línea válida que no sea el encabezado
+            for (i in lineas.indices.reversed()) {
+                val linea = lineas[i].trim()
+                if (linea.isNotEmpty() && i > 0) {
+                    val idStr = linea.split(",")[0].trim()
+                    val idParseado = idStr.toIntOrNull()
+                    if (idParseado != null) {
+                        ultimoIdCsv = idParseado
+                        break
+                    }
+                }
+            }
         }
-        for (usuario: Imprimible in usuarios) {
-            println(usuario.resumenDatos())
+
+        // Si ya hay clientes inscritos en la sesión actual con ID mayor, usamos el más alto
+        val maxIdMemoria = clientes.maxOfOrNull { it.id } ?: 0
+        val maxIdFinal = maxOf(ultimoIdCsv, maxIdMemoria)
+
+        return maxIdFinal + 1
+    }
+
+    /**
+     * Busca un cliente por su ID numérico.
+     * @return El [Cliente] encontrado o null si no existe.
+     */
+    fun buscarCliente(id: Int): Cliente? {
+        return clientes.find { it.id == id }
+    }
+
+    /**
+     * Reemplaza un cliente existente por una versión actualizada de sus datos.
+     */
+    fun actualizarCliente(clienteActualizado: Cliente): Boolean {
+        val indice = clientes.indexOfFirst { it.id == clienteActualizado.id }
+        return if (indice != -1) {
+            clientes[indice] = clienteActualizado
+            println("Cliente actualizado exitosamente: ${clienteActualizado.resumenDatos()}")
+            reescribirCsv()
+            true
+        } else {
+            println("No se encontró el cliente con ID ${clienteActualizado.id}")
+            false
+        }
+    }
+
+    /**
+     * Sincroniza la lista de clientes en memoria con el archivo CSV.
+     */
+    fun reescribirCsv(rutaArchivo: String = "data/usuarios.csv") {
+        val archivo = File(rutaArchivo)
+        try {
+            archivo.printWriter().use { escritor ->
+                escritor.println("Id,Nombre Completo,Suscripcion,Costo,FechaInicio,FechaFin")
+                for ((index, c) in clientes.withIndex()) {
+                    val sub = c.obtenerSuscripcion()
+                    val linea = "${c.id},\"${c.nombreCompleto}\",${sub.obtenerTipoPlan()},${sub.obtenerCosto()},${sub.obtenerFechaInicio()},${sub.obtenerFechaFin()}"
+                    
+                    // Si es el último cliente, usamos print() para no dejar la línea en blanco al final
+                    if (index == clientes.size - 1) {
+                        escritor.print(linea)
+                    } else {
+                        escritor.println(linea)
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            println("Advertencia: No se pudo actualizar el CSV: ${e.message}")
         }
     }
 

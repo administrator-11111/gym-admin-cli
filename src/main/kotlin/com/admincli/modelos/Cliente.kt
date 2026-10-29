@@ -32,6 +32,12 @@ class Cliente(
     fun desactivar() { activo = false}
 
     /**
+     * Devuelve la suscripción actual del cliente.
+     */
+    fun obtenerSuscripcion(): Suscripcion {
+        return this.suscripcionActual
+    }
+    /**
      * Verifica si la suscripción del cliente ha caducado.
      * @return true si la fecha actual es posterior a la fecha de fin de la suscripción.
      */

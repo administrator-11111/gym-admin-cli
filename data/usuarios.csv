@@ -1,4 +1,4 @@
-Id,Nombre,Apellido,Suscripcion,Costo,FechaInicio,FechaFin
+Id,Nombre Completo,Suscripcion,Costo,FechaInicio,FechaFin
 1,"Lamine Castro",Anual,190000.0,17/11/2025,16/11/2026
 2,"Sergio Yamal",Anual,190000.0,13/6/2024,12/6/2025
 3,"Sergio Trujillo",Trimestral,110000.0,9/1/2021,8/4/2021
@@ -196,6 +196,3 @@ Id,Nombre,Apellido,Suscripcion,Costo,FechaInicio,FechaFin
 195,"Jeffrey Barrios",Mensual,25000.0,11/6/2021,10/7/2021
 196,"Aurora Kirk",Anual,180000.0,28/7/2022,27/7/2023
 197,"Philip Moran",Trimestral,70000.0,9/3/2026,8/6/2026
-198,"Consuelo Leon",Trimestral,90000.0,3/11/2022,2/2/2023
-199,"Pierre Puente",Anual,190000.0,25/6/2024,24/6/2025
-200,"Bruno Dahmer",Trimestral,70000.0,7/2/2021,6/5/2021
