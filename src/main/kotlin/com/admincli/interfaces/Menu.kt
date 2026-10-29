@@ -109,8 +109,11 @@ class Menu {
 
             val suscripcion: Suscripcion = Suscripcion(tipoPlan, costo, fechaInicio, fechaFin)
             val cliente: Cliente = Cliente(id, nombre, suscripcion)
-            Gestor.inscribirCliente(cliente)
-            println("Cliente inscrito exitosamente: ${cliente.resumenDatos()}")
+
+            val registrado: Boolean = Gestor.inscribirCliente(cliente)
+            if (registrado) {
+                println("Cliente inscrito exitosamente: ${cliente.resumenDatos()}")
+            }
         } catch (e: NumberFormatException) {
             println("Error: Ingrese un valor numérico válido.")
         } catch (e: Exception) {
