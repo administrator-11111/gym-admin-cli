@@ -45,7 +45,7 @@ classDiagram
         - administradores: List~Administrador~
         + cargarDatos(rutaArchivo: String) Unit
         + iniciarSesion(usuario: String, clave: String) Boolean
-        + inscribirCliente(cliente: Cliente) Unit
+        + inscribirCliente(cliente: Cliente) Boolean
         + quitarCliente(id: Int) Boolean
         + listarClientes() Unit
         + mostrarMorosos() Unit
