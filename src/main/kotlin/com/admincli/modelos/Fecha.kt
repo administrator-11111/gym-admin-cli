@@ -26,7 +26,7 @@ class Fecha(
     /**
      * Constructor secundario que crea una Fecha con la fecha actual del sistema.
      */
-    constructor():this(
+    constructor(): this(
         LocalDate.now().dayOfMonth,
         LocalDate.now().monthValue,
         LocalDate.now().year
@@ -36,9 +36,7 @@ class Fecha(
      * Convierte esta Fecha a un objeto [LocalDate] de Java para comparaciones.
      * @return Objeto LocalDate equivalente.
      */
-    fun aLocalDate(): LocalDate {
-        return LocalDate.of(anio, mes, dia)
-    }
+    fun aLocalDate(): LocalDate = LocalDate.of(anio, mes, dia)
 
     /**
      * Suma una cantidad de meses a esta fecha, actualizando día, mes y año.
@@ -55,7 +53,23 @@ class Fecha(
      * Devuelve la fecha en formato "dia/mes/anio".
      * @return String con formato dd/mm/yyyy.
      */
-    override fun toString(): String {
-        return "$dia/$mes/$anio"
+    override fun toString(): String = "$dia/$mes/$anio"
+
+    /**
+     * Crea una instancia de [Fecha] a partir de una cadena de texto con el formato `dia/mes/anio`.
+     *
+     * Los espacios en blanco al inicio y al final de la cadena son ignorados automáticamente.
+     *
+     * @param cadena La representación en texto de la fecha (por ejemplo, `"29/10/2026"`).
+     * @return Una nueva instancia de [Fecha] con el día, mes y año extraídos.
+     * @throws IllegalArgumentException Si la [cadena] no contiene exactamente tres partes separadas por `/`.
+     * @throws NumberFormatException Si alguno de los componentes (día, mes o año) no es un número entero válido.
+     */
+    companion object {
+        fun desdeString(cadena: String): Fecha {
+            val partes = cadena.trim().split("/")
+            require(partes.size == 3) { "Formato de fecha inválido: '$cadena'. Se esperaba dia/mes/anio." }
+            return Fecha(partes[0].toInt(), partes[1].toInt(), partes[2].toInt())
+        }
     }
 }
