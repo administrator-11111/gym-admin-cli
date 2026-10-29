@@ -17,10 +17,10 @@ fun main() {
     println("Cargando datos iniciales...")
 
     val listaAdmins: List<Administrador> = listOf(
-        Administrador(0, "Iván Maldonado", "return", "1234"),
-        Administrador(0, "Lucas Sierra", "lucas", "1234"),
-        Administrador(0, "Alonso Lopez", "topsin", "1234"),
-        Administrador(0, "Yeral Mendez", "yerbal", "1234")
+        Administrador(1, "Iván Maldonado", "return", "1234"),
+        Administrador(2, "Lucas Sierra", "lucas", "1234"),
+        Administrador(3, "Alonso Lopez", "topsin", "1234"),
+        Administrador(4, "Yeral Mendez", "yerbal", "1234")
     )
 
     listaAdmins.forEach { admin ->
