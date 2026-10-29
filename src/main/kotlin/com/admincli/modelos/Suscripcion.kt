@@ -17,7 +17,13 @@ class Suscripcion(
     private val fechaInicio: Fecha,
     private val fechaFin: Fecha
 ) {
-    
+    constructor(tipoPlan: String, costo: Double) : this(
+        tipoPlan,
+        costo,
+        Fecha(),
+        calcularFechaFin(tipoPlan)
+    )
+
      /**
      * Devuelve el nombre del plan contratado.
      *
@@ -46,12 +52,6 @@ class Suscripcion(
      */
     fun obtenerFechaFin() : Fecha = this.fechaFin
 
-    constructor(tipoPlan: String, costo: Double) : this(
-        tipoPlan,
-        costo,
-        Fecha(),
-        calcularFechaFin(tipoPlan)
-    )
 
     companion object {
 
