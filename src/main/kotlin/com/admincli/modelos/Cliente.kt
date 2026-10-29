@@ -25,11 +25,12 @@ class Cliente(
     constructor(id: Int, nombreCompleto: String) : this (
         id,
         nombreCompleto,
-        Suscripcion("Mensual", 0.0)
+        suscripcionActual = Suscripcion(tipoPlan = "Mensual", costo = 0.0)
     )
 
     fun estaActivo(): Boolean = activo
-    fun desactivar() { activo = false}
+    fun activar() { activo = true }
+    fun desactivar() { activo = false }
 
     /**
      * Verifica si la suscripción del cliente ha caducado.
@@ -47,9 +48,17 @@ class Cliente(
     fun obtenerCostoSuscripcion(): Double {
         return suscripcionActual.obtenerCosto()
     }
+    fun obtenerTipoPlan(): String = suscripcionActual.obtenerTipoPlan()
+    fun obtenerFechaInicio(): Fecha = suscripcionActual.obtenerFechaInicio()
+    fun obtenerFechaFin(): Fecha = suscripcionActual.obtenerFechaFin()
 
     override fun resumenDatos() : String {
-        return "${super.resumenDatos()}(Plan: ${suscripcionActual.obtenerTipoPlan()} | Finaliza: ${suscripcionActual.obtenerFechaFin()})"
+        val estado = if (activo) "Activo" else "Inactivo"
+        return "${super.resumenDatos()}(Plan: ${suscripcionActual.obtenerTipoPlan()} | Desde: ${suscripcionActual.obtenerFechaInicio()} | Hasta: ${suscripcionActual.obtenerFechaFin()} | Estado: $estado)"
+    }
+
+    fun toCsvRow(): String {
+        return "$id,\"$nombreCompleto\",${suscripcionActual.obtenerTipoPlan()},${suscripcionActual.obtenerCosto()},${suscripcionActual.obtenerFechaInicio()},${suscripcionActual.obtenerFechaFin()}"
     }
 }
 
