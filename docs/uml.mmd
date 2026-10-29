@@ -19,6 +19,7 @@ classDiagram
         - suscripcionActual: Suscripcion
         + esMoroso() Boolean
         + obtenerCostoSuscripcion() Double
+        + obtenerSuscripcion() Suscripcion
         + resumenDatos() String
     }
     class Suscripcion {
@@ -51,13 +52,18 @@ classDiagram
         + mostrarMorosos() Unit
         + calcularGanancias() Double
         + registrarAdministrador(admin: Administrador) Unit
+        + obtenerSiguienteId() Int
+        + buscarCliente(id: Int) Cliente
+        + actualizarCliente(clienteActualizado: Cliente) Boolean
+        + reescribirCsv() Unit
     }
     class Menu {
         + ejecutar() Unit
         - mostrarMenu() Unit
         - limpiarConsola() Unit
+        - gestionarListaClientes() Unit
+        - editarClientePasoAPaso(cliente: Cliente) Unit
         - inscribirClienteDesdeConsola() Unit
-        - quitarClienteDesdeConsola() Unit
     }
 %% Relaciones
     Imprimible <|.. Usuario : implementa

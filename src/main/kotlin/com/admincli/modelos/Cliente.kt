@@ -8,13 +8,12 @@ package com.admincli.modelos
  * @constructor Crea un cliente con ID, nombre y suscripción.
  */
 class Cliente(
-    // Atributos heraddos de clase Usuario
+        // Atributos heredados de clase Usuario
     id: Int,
     nombreCompleto: String,
 
     // Atributo privado
-    private val suscripcionActual: Suscripcion,
-    private var activo: Boolean = true
+    private val suscripcionActual: Suscripcion
 ) : Usuario(id, nombreCompleto) {
 
     /**
@@ -27,9 +26,6 @@ class Cliente(
         nombreCompleto,
         Suscripcion("Mensual", 0.0)
     )
-
-    fun estaActivo(): Boolean = activo
-    fun desactivar() { activo = false}
 
     /**
      * Devuelve la suscripción actual del cliente.

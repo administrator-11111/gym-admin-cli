@@ -26,8 +26,17 @@ object Gestor {
     private val administradores: MutableList<Administrador> = mutableListOf()
 
     /**
+     * Agrega un cliente a la lista en memoria sin reescribir el CSV.
+     * Usado internamente durante la carga inicial de datos.
+     */
+    private fun agregarClienteEnMemoria(cliente: Cliente): Boolean {
+        if (clientes.any { it.id == cliente.id }) return false
+        clientes.add(cliente)
+        return true
+    }
+    /**
      * Carga clientes desde un archivo CSV.
-     * Formato esperado: Nombre,Apellido,Suscripcion TipoCosto,Dia/Mes/Anio
+     * Formato esperado: Id,"Nombre Completo",Suscripcion,Costo,FechaInicio,FechaFin
      * @param rutaArchivo Ruta al archivo CSV.
      */
     fun cargarDatos(rutaArchivo: String) {
@@ -83,7 +92,7 @@ object Gestor {
                 val suscripcion: Suscripcion = Suscripcion(tipoPlan, costo, fechaInicio, fechaFin)
                 val cliente: Cliente = Cliente(id, nombreCompleto, suscripcion)
 
-                inscribirCliente(cliente)
+                agregarClienteEnMemoria(cliente)
             } catch (e: Exception) {
                 println("Advertencia: Error al procesar línea ${i + 1}: ${e.message}")
             }

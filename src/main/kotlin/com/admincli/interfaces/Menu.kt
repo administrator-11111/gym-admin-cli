@@ -10,7 +10,7 @@ import java.math.BigDecimal //Para mostrar las ganacias con el numero completo
 /**
  * Clase que gestiona la interfaz interactiva (REPL) del sistema.
  */
-class Menu {
+class Menu(private val usuarioActual: String = "Admin"){
 
     private fun limpiarConsola(){
         print("\u001b[H\u001b[2J")
@@ -19,9 +19,9 @@ class Menu {
 
     private fun mostrarMenu(){
         println("""
-        ==================================
-        SISTEMA DE ADMINISTRACIÓN GIMNASIO
-        ==================================
+        ==============================================
+        SISTEMA DE ADMINISTRACIÓN GIMNASIO <<$usuarioActual>>
+        ==============================================
         [1] Ver lista de usuarios
         [2] Inscribir usuario
         [3] Revisar usuarios morosos
@@ -128,7 +128,15 @@ class Menu {
         val subActual = cliente.obtenerSuscripcion()
         print("Plan actual [${subActual.obtenerTipoPlan()}] (Mensual/Trimestral/Anual): ")
         val entradaPlan = readln().trim()
-        val nuevoPlan = if (entradaPlan.isNotEmpty()) entradaPlan else subActual.obtenerTipoPlan()
+        val nuevoPlan: String
+        if (entradaPlan.isEmpty()) {
+            nuevoPlan = subActual.obtenerTipoPlan()
+        } else if (entradaPlan in listOf("Mensual", "Trimestral", "Anual")) {
+            nuevoPlan = entradaPlan
+        } else {
+            println("Error: Plan no válido. Operación cancelada.")
+            return
+        }
 
         // 3. Costo
         print("Costo actual [${subActual.obtenerCosto()}]: ")

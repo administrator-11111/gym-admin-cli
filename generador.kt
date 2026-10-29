@@ -70,7 +70,7 @@ class GenerarSuscripcion : GeneradorBase(){
      */
     override fun generar(): String{
         val tipos = listOf("Mensual", "Trimestral", "Anual")
-        var coste: List<Int> = listOf(2, 1)
+        var coste: List<Int> = listOf()
         val suscripcion = tipos.random()
         if(suscripcion == "Mensual"){
             coste = listOf(20000, 25000, 30000)
