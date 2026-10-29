@@ -120,13 +120,15 @@ object Gestor {
      * Inscribe un nuevo cliente agregándolo a la lista del sistema.
      *
      * @param cliente Instancia de [Cliente] que contiene los datos del usuario y su suscripción.
+     * @return `true` si es posible inscribir al cliente
      */
-    fun inscribirCliente(cliente: Cliente) : Unit {
+    fun inscribirCliente(cliente: Cliente) : Boolean {
         if (clientes.any { it.id == cliente.id }) {
             println("Error: Ya existe un cliente con ID ${cliente.id}")
-            return
+            return false
         }
         clientes.add(cliente)
+        return true
     }
 
     /**
