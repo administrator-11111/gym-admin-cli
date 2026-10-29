@@ -15,7 +15,7 @@ class Suscripcion(
     private val tipoPlan: String,
     private val costo: Double,
     private val fechaInicio: Fecha,
-    private var fechaFin: Fecha
+    private val fechaFin: Fecha
 ) {
     
      /**
@@ -23,36 +23,29 @@ class Suscripcion(
      *
      * @return Tipo de plan de la suscripción.
      */
-    fun obtenerTipoPlan() : String {
-        return this.tipoPlan
-    }
+    fun obtenerTipoPlan() : String = this.tipoPlan
 
     /**
      * Devuelve el costo del plan contratado.
      *
      * @return Costo almacenado en la suscripción.
      */
-    fun obtenerCosto() : Double {
-        return this.costo
-    }
+    fun obtenerCosto() : Double = this.costo
 
   /**
      * Devuelve la fecha de inicio de la suscripción.
      *
      * @return Referencia al objeto [Fecha] almacenado, sin crear una copia.
      */
-    fun obtenerFechaInicio() : Fecha {
-        return this.fechaInicio
-    }
+    fun obtenerFechaInicio() : Fecha = this.fechaInicio
 
   /**
      * Devuelve la fecha de finalización de la suscripción.
      *
      * @return Referencia al objeto [Fecha] almacenado, sin crear una copia.
      */
-    fun obtenerFechaFin() : Fecha {
-        return this.fechaFin
-    }
+    fun obtenerFechaFin() : Fecha = this.fechaFin
+
     constructor(tipoPlan: String, costo: Double) : this(
         tipoPlan,
         costo,
@@ -61,23 +54,22 @@ class Suscripcion(
     )
 
     companion object {
+
+        fun duracionMeses(tipoPlan: String): Int {
+            return when (tipoPlan.trim().lowercase()) {
+                "mensual" -> 1
+                "trimestral" -> 3
+                "anual" -> 12
+                else -> throw IllegalArgumentException("Plan no válido: '$tipoPlan'. Válidos: Mensual, Trimestral, Anual.")
+            }
+        }
+
+
         private fun calcularFechaFin(tipoPlan: String): Fecha {
             val hoy = Fecha()
-
-            val meses = when (tipoPlan) {
-                "Mensual" -> 1
-                "Trimestral" -> 3
-                "Anual" -> 12
-                else -> throw IllegalArgumentException("Plan no válido $tipoPlan")
-            }
-
+            val meses = duracionMeses(tipoPlan)
             val termino = hoy.aLocalDate().plusMonths(meses.toLong())
-
-            return Fecha(
-                termino.dayOfMonth,
-                termino.monthValue,
-                termino.year
-            )
+            return Fecha(termino.dayOfMonth, termino.monthValue, termino.year)
         }
     }
 }
