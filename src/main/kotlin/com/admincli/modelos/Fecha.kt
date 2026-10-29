@@ -16,6 +16,13 @@ class Fecha(
     private var mes: Int,
     private var anio: Int
 ) {
+    init {
+        require(mes in 1..12) { "Mes inválido: $mes (debe ser entre 1 y 12)" }
+        require(dia in 1..31) { "Día inválido: $dia (debe ser entre 1 y 31)" }
+        require(anio >= 1900) { "Año inválido: $anio" }
+        LocalDate.of(anio, mes, dia) // esto verifica años bisiestos :) https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-local-date/-local-date.html
+    }
+
     /**
      * Constructor secundario que crea una Fecha con la fecha actual del sistema.
      */
