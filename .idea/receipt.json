@@ -1,0 +1,20 @@
+{
+    "spec": {
+        "template_id": "kmt",
+        "parameters": {
+            "utm_source": "other",
+            "utm_medium": "other",
+            "utm_campaign": "other"
+        },
+        "targets": {
+            "desktop": {
+                "ui": [
+                    "compose"
+                ]
+            }
+        },
+        "include_tests": true,
+        "build_system": "gradle"
+    },
+    "timestamp": "2026-11-20T18:40:53.993866736Z"
+}
